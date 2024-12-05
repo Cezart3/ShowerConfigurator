@@ -118,9 +118,9 @@ expressApp.get('/api/hardware/:id_cabina', (req, res) => {
     const queries = tables.map(table => {
         return new Promise((resolve, reject) => {
             const query = `
-                SELECT CodProdus, Denumire 
-                FROM ${table} 
-                WHERE id_cabina = ? 
+                SELECT CodProdus, Denumire
+                FROM ${table}
+                WHERE id_cabina = ?
                 GROUP BY CodProdus, Denumire`;
             db.query(query, [id_cabina], (err, results) => {
                 if (err) {

@@ -10,6 +10,7 @@
 <div class="container">
     <h1>Configurare Cabine de Duș</h1>
 
+    <!-- Step 1: Select Cabina -->
     <div class="form-row">
         <div class="form-group">
             <label for="cabinTypeSelect">Tip Cabina:</label>
@@ -25,7 +26,10 @@
             <label for="dimensionsInput">Dimensiuni (Lățime x Înălțime):</label>
             <input type="text" id="dimensionsInput" placeholder="Ex: 90 200">
         </div>
+    </div>
 
+    <!-- Step 2: Material and Finish Selection -->
+    <div class="form-row">
         <div class="form-group">
             <label for="materialSelect">Material:</label>
             <select id="materialSelect">
@@ -50,40 +54,46 @@
         </div>
     </div>
 
-    <div id="hardwareSelection" class="hardware-grid" style="display: none;">
+    <!-- Step 3: Hardware Selection (Accordion Layout) -->
+    <div id="hardwareSelection" class="accordion-container">
         <h2>Selectați Feroneria</h2>
 
-        <div id="batantaFeronerie" style="display: none;">
-            <h3>Feronerie pentru Cabina Batanta</h3>
-            <label for="balamaleSelect">Balamale:</label>
-            <select id="balamaleSelect"></select>
+        <div id="batantaFeronerie" class="accordion-section" style="display: none;">
+            <h3 onclick="toggleAccordion('batantaFeronerie')">Feronerie pentru Cabina Batanta</h3>
+            <div class="accordion-content">
+                <label for="balamaleSelect">Balamale:</label>
+                <select id="balamaleSelect"></select>
 
-            <label for="manerbutonSelect">Mânere Buton:</label>
-            <select id="manerbutonSelect"></select>
+                <label for="manerbutonSelect">Mânere Buton:</label>
+                <select id="manerbutonSelect"></select>
 
-            <label for="manereDiverseSelect">Mânere Diverse:</label>
-            <select id="manereDiverseSelect"></select>
+                <label for="manereDiverseSelect">Mânere Diverse:</label>
+                <select id="manereDiverseSelect"></select>
 
-            <label for="profileSelect">Profile:</label>
-            <select id="profileSelect"></select>
+                <label for="profileSelect">Profile:</label>
+                <select id="profileSelect"></select>
 
-            <label for="profileRigidizareSelect">Profile Rigidizare:</label>
-            <select id="profileRigidizareSelect"></select>
+                <label for="profileRigidizareSelect">Profile Rigidizare:</label>
+                <select id="profileRigidizareSelect"></select>
 
-            <label for="garnituriSelect">Garnituri:</label>
-            <select id="garnituriSelect"></select>
+                <label for="garnituriSelect">Garnituri:</label>
+                <select id="garnituriSelect"></select>
+            </div>
         </div>
 
-        <div id="culisantaFeronerie" style="display: none;">
-            <h3>Feronerie pentru Cabina Culisanta</h3>
-            <label for="profileSelectCulisanta">Profile:</label>
-            <select id="profileSelectCulisanta"></select>
+        <div id="culisantaFeronerie" class="accordion-section" style="display: none;">
+            <h3 onclick="toggleAccordion('culisantaFeronerie')">Feronerie pentru Cabina Culisanta</h3>
+            <div class="accordion-content">
+                <label for="profileSelectCulisanta">Profile:</label>
+                <select id="profileSelectCulisanta"></select>
 
-            <label for="setGlisantaSelect">Set Glisantă pentru Cabine de Duș:</label>
-            <select id="setGlisantaSelect"></select>
+                <label for="setGlisantaSelect">Set Glisantă pentru Cabine de Duș:</label>
+                <select id="setGlisantaSelect"></select>
+            </div>
         </div>
     </div>
 
+    <!-- Step 4: Pricing Section -->
     <div class="price-section" style="display: none;">
         <h2>Preturi</h2>
         <div id="priceDetails"></div>
@@ -103,7 +113,7 @@
         fetchDropdownData(); // Fetch dropdown data on page load
     });
 
-    // Function to update the feronerie options
+    // Function to update the feronerie options based on selected cabina type
     function updateFeronerie() {
         const cabinType = document.getElementById('cabinTypeSelect').value;
         const hardwareSection = document.getElementById('hardwareSelection');
@@ -119,6 +129,22 @@
             batantaSection.style.display = 'block';
         } else if (cabinType === 'culisanta') {
             culisantaSection.style.display = 'block';
+        }
+    }
+
+    // Toggle the accordion section visibility
+    function toggleAccordion(sectionId) {
+        const section = document.getElementById(sectionId);
+        const content = section.querySelector('.accordion-content');
+        const isVisible = content.style.display === 'block';
+
+        // Close all accordion sections first
+        const allSections = document.querySelectorAll('.accordion-content');
+        allSections.forEach(item => item.style.display = 'none');
+
+        // Toggle visibility of the clicked section
+        if (!isVisible) {
+            content.style.display = 'block';
         }
     }
 
@@ -185,8 +211,6 @@
         }
     }
 </script>
-
-
 
 </body>
 </html>

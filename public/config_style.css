@@ -1,31 +1,82 @@
 /* General body styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background-color: #1b1b1b;
+    background-color: #121212;
     color: #f0f0f0;
+    line-height: 1.6;
+    padding: 0;
+    box-sizing: border-box;
+    animation: fadeIn 0.5s ease-out;
 }
 
-/* Container styling */
+/* Keyframe animation for fade-in effect */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Main container styles with padding */
 .container {
     max-width: 1200px;
     margin: 20px auto;
-    padding: 30px;
-    background-color: #262626;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    background-color: #2b2b2b;
+    border-radius: 20px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease-in-out;
 }
 
-/* Header styling */
+/* Header and title */
 h1 {
-    font-size: 32px;
-    margin-bottom: 25px;
+    font-size: 36px;
+    margin-bottom: 20px;
     text-align: center;
     color: #ffffff;
     font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 0;
 }
 
-/* Form row styling */
+/* Navigation bar for easy steps navigation */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    animation: slideIn 0.4s ease-out;
+}
+
+.navbar a {
+    color: #ff5722;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar a:hover {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+/* Slide-in animation for navbar */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Form row styling with flexbox */
 .form-row {
     display: flex;
     flex-wrap: wrap;
@@ -33,76 +84,105 @@ h1 {
     gap: 20px;
 }
 
-/* Form group styling */
+/* Improved form group styling */
 .form-group {
     flex: 1;
     min-width: 45%;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    position: relative;
 }
 
-/* Label styling */
+/* Label and input/select styling */
 label {
     display: block;
-    font-size: 16px;
-    margin-bottom: 8px;
-    color: #ad6262;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ff5722;
 }
 
-/* Input and select box styling */
 input, select {
     width: 100%;
-    padding: 12px;
+    padding: 14px 16px;
     font-size: 16px;
-    border: 1px solid #ff1010;
-    border-radius: 4px;
-    background-color: #000000;
-    color: #a72323;
+    border: 1px solid #ff5722;
+    border-radius: 8px;
+    background-color: #333;
+    color: #f0f0f0;
+    transition: all 0.2s ease;
 }
 
-select:focus, input:focus {
-    border-color: #ff5722;
+/* On focus, input fields and select options have a smooth effect */
+input:focus, select:focus {
+    border-color: #ff9800;
     outline: none;
 }
 
-/* Adjusted layout for form elements */
-.form-group:nth-child(odd) {
-    margin-right: 10px;
-}
-
-.form-group:nth-child(even) {
-    margin-left: 10px;
-}
-
-/* Hardware section styles */
-.hardware-grid {
-    margin-top: 30px;
-}
-
-.hardware-options label, .hardware-options select {
-    display: block;
-    margin-bottom: 15px;
-}
-
-.hardware-options select {
-    width: 100%;
-}
-
-/* Button styling */
+/* Button styles with hover effect */
 button {
     background-color: #ff5722;
     border: none;
     color: #ffffff;
-    padding: 15px 30px;
+    padding: 16px 30px;
     font-size: 18px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-    margin: 10px;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-top: 15px;
 }
 
 button:hover {
     background-color: #e64a19;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* Sidebar navigation (for steps or categories) */
+.sidebar {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    animation: slideInSidebar 0.4s ease-out;
+}
+
+.sidebar a {
+    display: block;
+    color: #ff5722;
+    margin: 10px 0;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: #ff9800;
+}
+
+/* Slide-in animation for sidebar */
+@keyframes slideInSidebar {
+    0% {
+        transform: translateX(-250px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Hardware options grid styling */
+.hardware-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
 }
 
 /* Footer styling */
@@ -113,17 +193,37 @@ footer {
     background-color: #1b1b1b;
     color: #b62323;
     text-align: center;
-    padding: 10px 0;
+    padding: 12px 0;
     font-size: 14px;
-    box-shadow: 0 -2px 6px rgb(244 49 49 / 50%);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.4s ease-out forwards;
+    animation-delay: 1.5s;
 }
 
-/* Add a vibrant blue and orange accent */
-.container h2, .container h3 {
-    color: #ed3232;
+/* Progress bar and step indicators */
+.progress-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: #333;
+    border-radius: 20px;
+    margin-top: 20px;
+    animation: progressAnimation 0.4s ease-out forwards;
 }
 
-/* Ensuring no scroll for small adjustments */
-html, body {
+.progress-bar {
     height: 100%;
+    background-color: #ff5722;
+    width: 30%; /* Adjust width as steps progress */
+    border-radius: 20px;
+    transition: width 0.2s ease-in-out;
+}
+
+/* Animation for progress bar */
+@keyframes progressAnimation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 30%;
+    }
 }
