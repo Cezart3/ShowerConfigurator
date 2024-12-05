@@ -1,0 +1,129 @@
+/* General body styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #1b1b1b;
+    color: #f0f0f0;
+}
+
+/* Container styling */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #262626;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Header styling */
+h1 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Form row styling */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Form group styling */
+.form-group {
+    flex: 1;
+    min-width: 45%;
+    margin-bottom: 20px;
+}
+
+/* Label styling */
+label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #ad6262;
+}
+
+/* Input and select box styling */
+input, select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ff1010;
+    border-radius: 4px;
+    background-color: #000000;
+    color: #a72323;
+}
+
+select:focus, input:focus {
+    border-color: #ff5722;
+    outline: none;
+}
+
+/* Adjusted layout for form elements */
+.form-group:nth-child(odd) {
+    margin-right: 10px;
+}
+
+.form-group:nth-child(even) {
+    margin-left: 10px;
+}
+
+/* Hardware section styles */
+.hardware-grid {
+    margin-top: 30px;
+}
+
+.hardware-options label, .hardware-options select {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.hardware-options select {
+    width: 100%;
+}
+
+/* Button styling */
+button {
+    background-color: #ff5722;
+    border: none;
+    color: #ffffff;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #e64a19;
+}
+
+/* Footer styling */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #1b1b1b;
+    color: #b62323;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    box-shadow: 0 -2px 6px rgb(244 49 49 / 50%);
+}
+
+/* Add a vibrant blue and orange accent */
+.container h2, .container h3 {
+    color: #ed3232;
+}
+
+/* Ensuring no scroll for small adjustments */
+html, body {
+    height: 100%;
+}
