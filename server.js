@@ -45,10 +45,19 @@ const createApiRoute = (endpoint, tableName) => {
 
 // Define table names
 const tables = [
-    'balamale', 'manerebuton', 'profile', 'manerediverse',
-    'garnituri', 'rolasiaccesorii', 'manersicontraplacapentruusidesticla',
-    'manerepentruusidesticlaglisante', 'incuietori', 'piesebalustrade'
+    'balamale',
+    'manere_buton',
+    'profile',
+    'manere_diverse',
+    'garnituri',
+    'set_glisanta_pentru_cabina_de_dus',
+    'maner_si_contraplacanta_pentru_usi_de_sticla',
+    'manere_pentru_usi_de_sticla_glisante',
+    'incuietori',
+    'piese_balustrade',
+    'profile_rigidizare_si_conectori'
 ];
+
 
 // Create routes dynamically for each table
 tables.forEach(table => createApiRoute(table, table));
@@ -98,12 +107,13 @@ expressApp.delete('/api/admin/deleteProduct', (req, res) => {
 // Function to handle dynamic table selection based on id_cabina
 const getTableByCabinaType = (id_cabina) => {
     const mappings = {
-        1: ['balamale', 'manerebuton', 'manerediverse', 'profile', 'garnituri', 'profilerigidizare'],
-        2: ['profile', 'setglisanta'],
+        1: ['balamale', 'manere_buton', 'manere_diverse', 'profile', 'garnituri', 'profile_rigidizare_si_conectori'],
+        2: ['profile', 'set_glisanta_pentru_cabina_de_dus'],
         3: [], // Usi Toc Aluminiu - no data yet
     };
     return mappings[id_cabina] || [];
 };
+
 
 // Create a new API endpoint for fetching hardware by cabina type
 expressApp.get('/api/hardware/:id_cabina', (req, res) => {

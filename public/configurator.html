@@ -73,8 +73,8 @@
                 <label for="profileSelect">Profile:</label>
                 <select id="profileSelect"></select>
 
-                <label for="profileRigidizareSelect">Profile Rigidizare:</label>
-                <select id="profileRigidizareSelect"></select>
+                <label for="profileRigidizareSiConectoriSelect">Profile Rigidizare Si Conectori:</label>
+                <select id="profileRigidizareSiConectoriSelect"></select>
 
                 <label for="garnituriSelect">Garnituri:</label>
                 <select id="garnituriSelect"></select>
@@ -152,9 +152,10 @@
     async function fetchDropdownData() {
         try {
             const tables = [
-                'balamale', 'manerebuton', 'manerediverse',
-                'profile', 'garnituri'
+                'balamale', 'manere_buton', 'manere_diverse',
+                'profile', 'garnituri', 'profile_rigidizare_si_conectori'
             ];
+
 
             // Loop through each table and fetch data
             for (const table of tables) {
@@ -177,10 +178,10 @@
             case 'balamale':
                 dropdownId = 'balamaleSelect';
                 break;
-            case 'manerebuton':
+            case 'manere_buton': // Nume corect de tabel
                 dropdownId = 'manerbutonSelect';
                 break;
-            case 'manerediverse':
+            case 'manere_diverse': // Nume corect de tabel
                 dropdownId = 'manereDiverseSelect';
                 break;
             case 'profile':
@@ -189,9 +190,13 @@
             case 'garnituri':
                 dropdownId = 'garnituriSelect';
                 break;
+            case 'profile_rigidizare_si_conectori': // Nume corect de tabel
+                dropdownId = 'profileRigidizareSiConectoriSelect';
+                break;
             default:
                 return;
         }
+
 
         const dropdown = document.getElementById(dropdownId);
         dropdown.innerHTML = ''; // Clear existing options
