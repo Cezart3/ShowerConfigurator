@@ -2,9 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Product Management</title>
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
+<header>
+    <h1>Admin - Product Management</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Add Product</h2>
+        <form id="addForm">
+            <input type="text" id="addTable" placeholder="Table (e.g., balamale)" required>
+            <input type="text" id="addCodProdus" placeholder="CodProdus" required>
+            <input type="text" id="addDenumire" placeholder="Denumire" required>
+            <input type="number" id="addPrice" placeholder="Price" required>
+            <button type="submit">Add Product</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Search Product</h2>
+        <form id="searchForm">
+            <input type="text" id="searchTable" placeholder="Table (e.g., balamale)" required>
+            <input type="text" id="searchCodProdus" placeholder="CodProdus" required>
+            <button type="submit">Search Product</button>
+        </form>
+        <div id="searchResult"></div>
+    </section>
+
+    <section>
+        <h2>Modify Product</h2>
+        <form id="modifyForm">
+            <input type="text" id="modifyTable" placeholder="Table (e.g., balamale)" required>
+            <input type="text" id="modifyCodProdus" placeholder="CodProdus" required>
+            <input type="number" id="modifyNewPrice" placeholder="New Price" required>
+            <button type="submit">Modify Product</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Delete Product</h2>
+        <form id="deleteForm">
+            <input type="text" id="deleteTable" placeholder="Table (e.g., balamale)" required>
+            <input type="text" id="deleteCodProdus" placeholder="CodProdus" required>
+            <button type="submit">Delete Product</button>
+        </form>
+    </section>
+</main>
+
+<script src="../JS_functions/admin.js"></script>
+<script src="../JS_functions/database_functions.js"></script>
+
 
 </body>
 </html>

@@ -29,11 +29,22 @@ db.connect((err) => {
     console.log('Connected to the database');
 });
 
+// Function to fetch data from a table
+const fetchDataFromTable = (tableName, callback) => {
+    const query = `SELECT CodProdus, Denumire FROM ${tableName} GROUP BY CodProdus, Denumire`;
+    db.query(query, (err, results) => {
+        if (err) {
+            callback(err, null);  // Pass the error to the callback
+        } else {
+            callback(null, results);  // Pass the results to the callback
+        }
+    });
+};
+
 // Function to create API routes for each table
 const createApiRoute = (endpoint, tableName) => {
     expressApp.get(`/api/${endpoint}`, (req, res) => {
-        const query = `SELECT CodProdus, Denumire FROM ${tableName} GROUP BY CodProdus, Denumire`;
-        db.query(query, (err, results) => {
+        fetchDataFromTable(tableName, (err, results) => {
             if (err) {
                 res.status(500).json({ error: `Error fetching data from ${tableName}` });
                 return;
@@ -58,11 +69,11 @@ const tables = [
     'profile_rigidizare_si_conectori'
 ];
 
-
 // Create routes dynamically for each table
 tables.forEach(table => createApiRoute(table, table));
 
 // Admin API routes (login, add, update, delete product)
+
 expressApp.post('/api/admin/login', async (req, res) => {
     const { username, password } = req.body;
     const query = `SELECT * FROM admin_users WHERE username = ?`;
@@ -104,6 +115,25 @@ expressApp.delete('/api/admin/deleteProduct', (req, res) => {
         res.json({ success: true, message: 'Product deleted successfully' });
     });
 });
+expressApp.post('/api/admin/searchProduct', (req, res) => {
+    const { table, CodProdus } = req.body;
+    if (!table || !CodProdus) {
+        return res.status(400).json({ error: 'Table and CodProdus are required.' });
+    }
+    const query = `SELECT * FROM ?? WHERE CodProdus = ?`;
+
+    db.query(query, [table, CodProdus], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (results.length === 0) {
+            return res.status(404).json({ success: false, message: 'Product not found.' });
+        }
+        res.json({ success: true, product: results[0] });
+    });
+});
+
+
 // Function to handle dynamic table selection based on id_cabina
 const getTableByCabinaType = (id_cabina) => {
     const mappings = {
@@ -113,7 +143,6 @@ const getTableByCabinaType = (id_cabina) => {
     };
     return mappings[id_cabina] || [];
 };
-
 
 // Create a new API endpoint for fetching hardware by cabina type
 expressApp.get('/api/hardware/:id_cabina', (req, res) => {
