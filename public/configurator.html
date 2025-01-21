@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configurare Cabine de Duș</title>
-    <link rel="stylesheet" href="config_style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
+    <!-- Un singur fișier CSS cu toate stilurile -->
+    <link rel="stylesheet" href="config_style.css">
+    <!-- Font Awesome pentru iconițe -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
 <header class="top-header">
     <div class="logo-container">
@@ -25,7 +28,6 @@
         <div class="icon-mail"></div>
         <div class="icon-info"></div>
 
-
         <div class="language-selector">
             <span>ROMÂNIA</span>
             <i class="icon icon-arrow-down"></i>
@@ -33,162 +35,224 @@
     </div>
 </header>
 
-<div class="container">
-    <h1>Configurare Cabine de Duș</h1>
+<!-- Container principal, conține Bara Laterală + Conținutul de pași -->
+<div class="config-container">
 
-    <!-- Step 1: Select Cabina -->
-    <div class="form-row">
-        <div class="form-group">
-            <label for="cabinTypeSelect">Tip Cabina:</label>
-            <select id="cabinTypeSelect" onchange="updateFeronerie()">
-                <option value="">-- Selectați Tipul de Cabina --</option>
-                <option value="batanta">Cabina Batanta</option>
-                <option value="culisanta">Cabina Culisanta</option>
-            </select>
-        </div>
+    <!-- BARA LATERALĂ: 5 pași -->
+    <nav class="side-nav">
+        <ul>
+            <li class="active-step" data-step="1" onclick="goToStep(1)">
+                <span class="step-number">1</span>
+                <span class="step-text">Tip Cabină</span>
+            </li>
+            <li data-step="2" onclick="goToStep(2)">
+                <span class="step-number">2</span>
+                <span class="step-text">Material & Finisaj</span>
+            </li>
+            <li data-step="3" onclick="goToStep(3)">
+                <span class="step-number">3</span>
+                <span class="step-text">Feronerie</span>
+            </li>
+            <li data-step="4" onclick="goToStep(4)">
+                <span class="step-number">4</span>
+                <span class="step-text">Dimensiuni</span>
+            </li>
+            <li data-step="5" onclick="goToStep(5)">
+                <span class="step-number">5</span>
+                <span class="step-text">Prețuri</span>
+            </li>
+        </ul>
+    </nav>
 
-        <div class="form-group">
-            <label for="dimensionsInput">Dimensiuni (Lățime x Înălțime):</label>
-            <input type="text" id="dimensionsInput" placeholder="Ex: 90 200">
-        </div>
-    </div>
+    <!-- Conținutul pe pași -->
+    <section class="steps-content">
 
-    <!-- Step 2: Material and Finish Selection -->
-    <div class="form-row">
-        <div class="form-group">
-            <label for="materialSelect">Material:</label>
-            <select id="materialSelect">
-                <option value="">-- Selectați Materialul --</option>
-                <option value="Zinc">Zinc</option>
-                <option value="Aluminiu">Aluminiu</option>
-                <option value="Otel inoxidabil#304">Otel inoxidabil#304</option>
-            </select>
-        </div>
+        <!-- PAS 1: Alegere Tip Cabina (imagini) -->
+        <div class="step-content active" id="step-1">
+            <h1 style="text-align:center;">Tip Cabina</h1>
 
-        <div class="form-group">
-            <label for="finishColorSelect">Culoare Finisaj:</label>
-            <select id="finishColorSelect">
-                <option value="">-- Selectați Culoarea --</option>
-                <option value="satin">Satin</option>
-                <option value="lucios">Lucios</option>
-                <option value="negru">Negru</option>
-                <option value="alb">Alb</option>
-                <option value="gold">Gold</option>
-                <option value="rose-gold">Rose-Gold</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Step 3: Hardware Selection (Accordion Layout) -->
-    <div id="hardwareSelection" class="accordion-container">
-        <h2>Selectați Feroneria</h2>
-
-        <div id="batantaFeronerie" class="accordion-section" style="display: none;">
-            <h3 onclick="toggleAccordion('batantaFeronerie')">Feronerie pentru Cabina Batanta</h3>
-            <div class="accordion-content">
-                <label for="balamaleSelect">Balamale:</label>
-                <select id="balamaleSelect"></select>
-
-                <label for="manerbutonSelect">Mânere Buton:</label>
-                <select id="manerbutonSelect"></select>
-
-                <label for="manereDiverseSelect">Mânere Diverse:</label>
-                <select id="manereDiverseSelect"></select>
-
-                <label for="profileSelect">Profile:</label>
-                <select id="profileSelect"></select>
-
-                <label for="profileRigidizareSiConectoriSelect">Profile Rigidizare Si Conectori:</label>
-                <select id="profileRigidizareSiConectoriSelect"></select>
-
-                <label for="garnituriSelect">Garnituri:</label>
-                <select id="garnituriSelect"></select>
+            <div class="cabin-selection">
+                <div class="cabin-option" onclick="chooseCabin('batanta', this)">
+                    <img src="./Pictures/Batanta.jpg" alt="Cabina Batanta">
+                    <p>Cabina Batanta</p>
+                </div>
+                <div class="cabin-option" onclick="chooseCabin('culisanta', this)">
+                    <img src="./Pictures/Culisanta.jpg" alt="Cabina Culisanta">
+                    <p>Cabina Culisanta</p>
+                </div>
             </div>
+
+            <button class="btn-next" onclick="goToStep(2)">Următorul pas</button>
         </div>
 
-        <div id="culisantaFeronerie" class="accordion-section" style="display: none;">
-            <h3 onclick="toggleAccordion('culisantaFeronerie')">Feronerie pentru Cabina Culisanta</h3>
-            <div class="accordion-content">
-                <label for="profileSelectCulisanta">Profile:</label>
-                <select id="profileSelectCulisanta"></select>
-
-                <label for="setGlisantaSelect">Set Glisantă pentru Cabine de Duș:</label>
-                <select id="setGlisantaSelect"></select>
+        <!-- PAS 2: Material & Finisaj -->
+        <div class="step-content" id="step-2">
+            <h2>Material & Culoare Finisaj</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="materialSelect">Material:</label>
+                    <select id="materialSelect">
+                        <option value="">-- Selectați Materialul --</option>
+                        <option value="Zinc">Zinc</option>
+                        <option value="Aluminiu">Aluminiu</option>
+                        <option value="Otel inoxidabil#304">Otel inoxidabil#304</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="finishColorSelect">Culoare Finisaj:</label>
+                    <select id="finishColorSelect">
+                        <option value="">-- Selectați Culoarea --</option>
+                        <option value="satin">Satin</option>
+                        <option value="lucios">Lucios</option>
+                        <option value="negru">Negru</option>
+                        <option value="alb">Alb</option>
+                        <option value="gold">Gold</option>
+                        <option value="rose-gold">Rose-Gold</option>
+                    </select>
+                </div>
             </div>
+            <button class="btn-next" onclick="goToStep(3)">Următorul pas</button>
         </div>
-    </div>
 
-    <!-- Step 4: Pricing Section -->
-    <div class="price-section" style="display: none;">
-        <h2>Preturi</h2>
-        <div id="priceDetails"></div>
-    </div>
+        <!-- PAS 3: Feronerie (Accordion) -->
+        <div class="step-content" id="step-3">
+            <h2>Selectați Feroneria</h2>
+            <div id="hardwareSelection" class="accordion-container">
 
+                <div id="batantaFeronerie" class="accordion-section" style="display: none;">
+                    <h3 onclick="toggleAccordion('batantaFeronerie')">Feronerie pentru Cabina Batanta</h3>
+                    <div class="accordion-content">
+                        <label for="balamaleSelect">Balamale:</label>
+                        <select id="balamaleSelect"></select>
+
+                        <label for="manerbutonSelect">Mânere Buton:</label>
+                        <select id="manerbutonSelect"></select>
+
+                        <label for="manereDiverseSelect">Mânere Diverse:</label>
+                        <select id="manereDiverseSelect"></select>
+
+                        <label for="profileSelect">Profile:</label>
+                        <select id="profileSelect"></select>
+
+                        <label for="profileRigidizareSiConectoriSelect">Profile Rigidizare Si Conectori:</label>
+                        <select id="profileRigidizareSiConectoriSelect"></select>
+
+                        <label for="garnituriSelect">Garnituri:</label>
+                        <select id="garnituriSelect"></select>
+                    </div>
+                </div>
+
+                <div id="culisantaFeronerie" class="accordion-section" style="display: none;">
+                    <h3 onclick="toggleAccordion('culisantaFeronerie')">Feronerie pentru Cabina Culisanta</h3>
+                    <div class="accordion-content">
+                        <label for="profileSelectCulisanta">Profile:</label>
+                        <select id="profileSelectCulisanta"></select>
+
+                        <label for="setGlisantaSelect">Set Glisantă:</label>
+                        <select id="setGlisantaSelect"></select>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-next" onclick="goToStep(4)">Următorul pas</button>
+        </div>
+
+        <!-- PAS 4: Introducere Dimensiuni -->
+        <div class="step-content" id="step-4">
+            <h2>Introduceți Dimensiunile</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dimensionsInput">Dimensiuni (Lățime x Înălțime):</label>
+                    <input type="text" id="dimensionsInput" placeholder="Ex: 90 200">
+                </div>
+            </div>
+            <button class="btn-next" onclick="goToStep(5)">Următorul pas</button>
+        </div>
+
+        <!-- PAS 5: Prețuri -->
+        <div class="step-content" id="step-5">
+            <h2>Prețuri</h2>
+            <div class="price-section">
+                <div id="priceDetails">
+                    <p>Aici vei afișa costurile, prețurile etc. (Demo)</p>
+                </div>
+            </div>
+            <button class="btn-next" onclick="finalizeConfig()">Finalizează</button>
+        </div>
+
+    </section>
 </div>
 
 <footer>
     &copy; 2024 Configurator Cabine de Duș
 </footer>
 
+<!-- Script pentru popularea dropdown-urilor + logica "step by step" -->
 <script src="../JS_functions/database_functions.js"></script>
-
 <script>
+    /* Variabilă globală pentru tipul de cabină */
+    let selectedCabinType = "";
+
+    // La încărcarea paginii, populăm dropdown-urile
     document.addEventListener('DOMContentLoaded', function() {
-        updateFeronerie(); // Ensure the UI is correctly set based on the selected value
-        fetchDropdownData(); // Fetch dropdown data on page load
+        fetchDropdownData();
     });
 
-    // Function to update the feronerie options based on selected cabina type
+    // Funcție apelată la click pe imagine
+    function chooseCabin(type, element) {
+        selectedCabinType = type;
+
+        // Scoatem "selected" de la toate opțiunile
+        document.querySelectorAll('.cabin-option').forEach((opt) => {
+            opt.classList.remove('selected');
+        });
+        // Adăugăm "selected" pe opțiunea clicată
+        element.classList.add('selected');
+
+        // Actualizăm feroneria
+        updateFeronerie();
+    }
+
+    // Afișează / ascunde feroneria în Pasul 3
     function updateFeronerie() {
-        const cabinType = document.getElementById('cabinTypeSelect').value;
-        const hardwareSection = document.getElementById('hardwareSelection');
         const batantaSection = document.getElementById('batantaFeronerie');
         const culisantaSection = document.getElementById('culisantaFeronerie');
 
-        // Hide both sections initially
+        // Implicit, ascunde ambele
         batantaSection.style.display = 'none';
         culisantaSection.style.display = 'none';
-        hardwareSection.style.display = 'block'; // Always show the hardware section once a type is selected
 
-        if (cabinType === 'batanta') {
+        if (selectedCabinType === 'batanta') {
             batantaSection.style.display = 'block';
-        } else if (cabinType === 'culisanta') {
+        } else if (selectedCabinType === 'culisanta') {
             culisantaSection.style.display = 'block';
         }
     }
 
-    // Toggle the accordion section visibility
+    // Toggle accordion la Pas 3
     function toggleAccordion(sectionId) {
         const section = document.getElementById(sectionId);
         const content = section.querySelector('.accordion-content');
-        const isVisible = content.style.display === 'block';
+        const isVisible = (content.style.display === 'block');
 
-        // Close all accordion sections first
-        const allSections = document.querySelectorAll('.accordion-content');
-        allSections.forEach(item => item.style.display = 'none');
+        // Închidem toate secțiunile
+        document.querySelectorAll('.accordion-content').forEach(el => el.style.display = 'none');
 
-        // Toggle visibility of the clicked section
+        // Afișăm doar pe cea clicată, dacă era închisă
         if (!isVisible) {
             content.style.display = 'block';
         }
     }
 
-    // Fetch dropdown data from the server and populate the selects
+    // Preiau date din DB și populez dropdown-urile (exact logica ta)
     async function fetchDropdownData() {
         try {
             const tables = [
                 'balamale', 'manere_buton', 'manere_diverse',
                 'profile', 'garnituri', 'profile_rigidizare_si_conectori'
             ];
-
-
-            // Loop through each table and fetch data
             for (const table of tables) {
                 const response = await fetch(`http://localhost:3000/api/${table}`);
                 const data = await response.json();
-
-                console.log(`Data for ${table}:`, data); // Debugging: log data to ensure correct data is fetched
-
                 populateDropdown(table, data);
             }
         } catch (error) {
@@ -196,51 +260,48 @@
         }
     }
 
-    // Populate the dropdown options based on the table name and data
     function populateDropdown(table, data) {
         let dropdownId;
         switch (table) {
-            case 'balamale':
-                dropdownId = 'balamaleSelect';
-                break;
-            case 'manere_buton': // Nume corect de tabel
-                dropdownId = 'manerbutonSelect';
-                break;
-            case 'manere_diverse': // Nume corect de tabel
-                dropdownId = 'manereDiverseSelect';
-                break;
-            case 'profile':
-                dropdownId = 'profileSelect';
-                break;
-            case 'garnituri':
-                dropdownId = 'garnituriSelect';
-                break;
-            case 'profile_rigidizare_si_conectori': // Nume corect de tabel
-                dropdownId = 'profileRigidizareSiConectoriSelect';
-                break;
-            default:
-                return;
+            case 'balamale': dropdownId = 'balamaleSelect'; break;
+            case 'manere_buton': dropdownId = 'manerbutonSelect'; break;
+            case 'manere_diverse': dropdownId = 'manereDiverseSelect'; break;
+            case 'profile': dropdownId = 'profileSelect'; break;
+            case 'garnituri': dropdownId = 'garnituriSelect'; break;
+            case 'profile_rigidizare_si_conectori': dropdownId = 'profileRigidizareSiConectoriSelect'; break;
+            default: return;
         }
-
-
         const dropdown = document.getElementById(dropdownId);
-        dropdown.innerHTML = ''; // Clear existing options
+        dropdown.innerHTML = ''; // curăț
 
-        // If data is returned, populate the dropdown
         if (data && data.length > 0) {
             data.forEach(item => {
                 const option = document.createElement('option');
                 option.value = item.CodProdus;
-                option.textContent = `${item.CodProdus} - ${item.Denumire}`; // Display CodProdus and Denumire
+                option.textContent = `${item.CodProdus} - ${item.Denumire}`;
                 dropdown.appendChild(option);
             });
         } else {
             const option = document.createElement('option');
-            option.textContent = `No data available for ${table}`;
+            option.textContent = `No data for ${table}`;
             dropdown.appendChild(option);
         }
     }
-</script>
 
+    // Trecere la un alt pas
+    function goToStep(stepNumber) {
+        document.querySelectorAll('.step-content').forEach(step => step.classList.remove('active'));
+        document.getElementById(`step-${stepNumber}`).classList.add('active');
+
+        document.querySelectorAll('.side-nav li').forEach(li => li.classList.remove('active-step'));
+        const currentItem = document.querySelector(`.side-nav li[data-step="${stepNumber}"]`);
+        if (currentItem) currentItem.classList.add('active-step');
+    }
+
+    // Pas final, ex. generare cost
+    function finalizeConfig() {
+        alert('Config finalizat! Poți adăuga logica de calcul preț etc.');
+    }
+</script>
 </body>
 </html>
